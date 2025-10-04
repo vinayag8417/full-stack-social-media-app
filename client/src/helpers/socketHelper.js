@@ -1,19 +1,7 @@
-import { io } from "socket.io-client";
-import { BASE_URL } from "../config";
-import { isLoggedIn } from "./authHelper";
+let BASE_URL = "https://full-stack-social-media-app-q1f4.onrender.com/";
 
-export let socket;
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  BASE_URL = "http://localhost:4000/";
+}
 
-export const initiateSocketConnection = () => {
-  const user = isLoggedIn();
-
-  socket = io(BASE_URL, {
-    auth: {
-      token: user && user.token,
-    },
-  });
-};
-
-export const disconnectSocket = () => {
-  if (socket) socket.disconnect();
-};
+export { BASE_URL };
