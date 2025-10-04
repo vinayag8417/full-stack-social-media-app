@@ -1,4 +1,4 @@
-let BASE_URL = "https://post-it-heroku.herokuapp.com/";
+let BASE_URL = "https://full-stack-social-media-app-q1f4.onrender.com/";
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   BASE_URL = "http://localhost:4000/";
 }
