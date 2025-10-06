@@ -1,7 +1,30 @@
-let BASE_URL = "https://full-stack-social-media-app-q1f4.onrender.com/";
+import { io } from 'socket.io-client';
+import { BASE_URL } from '../config';
 
-if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-  BASE_URL = "http://localhost:4000/";
-}
+let socket;
 
-export { BASE_URL };
+export const initiateSocketConnection = () => {
+  socket = io(BASE_URL, {
+    transports: ['websocket', 'polling'],
+  });
+  
+  socket.on('connect', () => {
+    console.log('Socket connected:', socket.id);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Socket disconnected');
+  });
+
+  return socket;
+};
+
+export const getSocket = () => {
+  return socket;
+};
+
+export const disconnectSocket = () => {
+  if (socket) {
+    socket.disconnect();
+  }
+};
