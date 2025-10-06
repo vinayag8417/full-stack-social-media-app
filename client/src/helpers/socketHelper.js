@@ -28,3 +28,6 @@ export const disconnectSocket = () => {
     socket.disconnect();
   }
 };
+
+// Export socket directly as well
+export { socket };
